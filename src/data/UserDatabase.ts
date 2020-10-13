@@ -4,7 +4,7 @@ import { User } from "../model/UserModel";
 export default class UserDatabase extends BaseDatabase {
 private static TABLE_NAME = "fullstack_user";
 
-    public static createUser(
+    public async createUser(
         id: string,
         name: string,
         email: string,

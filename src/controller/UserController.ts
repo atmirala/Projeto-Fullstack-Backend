@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import UserBusiness from "../business/UserBusiness";
+import {UserBusiness }from "../business/UserBusiness";
 import { SignupInputDTO, LoginInputDTO } from "../model/UserModel";
 
 export default class UseController {
@@ -7,7 +7,7 @@ export default class UseController {
     const userBusiness: UserBusiness = new UserBusiness();
     try {
       const signupInputDTO: SignupInputDTO = req.body;
-      const token = await userBusiness.signup(signupInputDTO);
+      const token = await userBusiness.createUser(signupInputDTO);
 
       res.status(200).send({ message: "Usuário cadastrado", token });
     } catch (error) {
@@ -15,15 +15,15 @@ export default class UseController {
     }
   }
 
-  async login(req: Request, res: Response): Promise<void> {
-    const userBusiness: UserBusiness = new UserBusiness();
-    try {
-      const loginInputDTO: LoginInputDTO = req.body;
-      const token = await userBusiness.login(loginInputDTO);
+//   async login(req: Request, res: Response): Promise<void> {
+//     const userBusiness: UserBusiness = new UserBusiness();
+//     try {
+//       const loginInputDTO: LoginInputDTO = req.body;
+//       const token = await userBusiness.login(loginInputDTO);
 
-      res.status(200).send({ message: "Usuário logado", token });
-    } catch (error) {
-      res.status(400).send({ message: error.sqlMessage || error.message });
-    }
-  }
+//       res.status(200).send({ message: "Usuário logado", token });
+//     } catch (error) {
+//       res.status(400).send({ message: error.sqlMessage || error.message });
+//     }
+//   }
 }

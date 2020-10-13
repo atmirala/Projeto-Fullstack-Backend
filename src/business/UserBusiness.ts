@@ -23,5 +23,36 @@ export class UserBusiness {
         return accessToken;
     }
 
+    public async login(input: LoginInputDTO) {
+        if (!input.email) {
+          throw new Error("Email invalido!");
+        }
+    
+        if (!input.password) {
+          throw new Error("Digite sua senha");
+        }
+    
+        const userDatabase = new UserDatabase();
+        const user = await userDatabase.getUserByEmail(input.email);
+    
+        if (!user) {
+          throw new Error("Conta invalida");
+        }
+    
+        const hashManager = new HashManager();
+        const isPasswordCorrect = await hashManager.compare(
+          input.password,
+          user.getPassword()
+        );
+    
+        if (!isPasswordCorrect) {
+          throw new Error("Senha ou usuário inválida");
+        }
+    
+        const token = new Authenticator().generateToken({ id: user.getId() });
+        return token;
+      }
+ 
+    //login precisa ser feito
    
 }

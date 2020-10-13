@@ -15,15 +15,15 @@ export default class UseController {
     }
   }
 
-//   async login(req: Request, res: Response): Promise<void> {
-//     const userBusiness: UserBusiness = new UserBusiness();
-//     try {
-//       const loginInputDTO: LoginInputDTO = req.body;
-//       const token = await userBusiness.login(loginInputDTO);
+  async login(req: Request, res: Response): Promise<void> {
+    const userBusiness: UserBusiness = new UserBusiness();
+     try {
+       const loginInputDTO: LoginInputDTO = req.body;
+       const token = await userBusiness.login(loginInputDTO);
 
-//       res.status(200).send({ message: "Usuário logado", token });
-//     } catch (error) {
-//       res.status(400).send({ message: error.sqlMessage || error.message });
-//     }
-//   }
+       res.status(200).send({ message: "Usuário logado", token });
+     } catch (error) {
+       res.status(400).send({ message: error.sqlMessage || error.message });
+     }
+   }
 }

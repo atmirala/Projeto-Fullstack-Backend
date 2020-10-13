@@ -2,15 +2,15 @@ import BaseDatabase from "./BaseDatabase";
 import { User } from "../model/UserModel";
 
 export default class UserDatabase extends BaseDatabase {
-    public TABLE_NAME = "fullstack_user";
+private static TABLE_NAME = "fullstack_user";
 
-    public async createUser(
+    public static createUser(
         id: string,
         name: string,
         email: string,
         nickname: string,
         password: string
-    ): Promise<void> {
+    ):Promise<any> {
         try {
             await this.getConnection()
             .insert({
